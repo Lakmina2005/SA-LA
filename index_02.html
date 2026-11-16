@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f0ff" />
+  <title>Secure Portal — Lakmina Sanjana 👑️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #f6f1ff;
+      --bg-glow: rgba(168, 85, 247, 0.18);
+      --text-main: #2e1065;
+      --text-muted: rgba(107, 33, 168, 0.78);
+      --card-bg: rgba(252, 250, 255, 0.95);
+      --card-border: rgba(216, 180, 254, 0.9);
+      --card-shadow: 0 22px 50px rgba(109, 40, 217, 0.15), 0 8px 0 #e2ccff;
+      --input-bg: rgba(244, 238, 255, 0.92);
+      --input-border: rgba(192, 132, 252, 0.65);
+      --input-focus: #9333ea;
+      --divider: rgba(216, 180, 254, 0.7);
+      --icon-hover: rgba(233, 213, 255, 0.65);
+
+      --btn-primary-bg: linear-gradient(180deg, #9333ea 0%, #7e22ce 100%);
+      --btn-primary-hover: linear-gradient(180deg, #a855f7 0%, #9333ea 100%);
+      --btn-primary-shadow: 0 5px 0 #581c87, 0 10px 22px rgba(126, 34, 206, 0.32);
+      --btn-primary-active: 0 1px 0 #581c87, 0 3px 8px rgba(126, 34, 206, 0.25);
+
+      --menu-bg: linear-gradient(180deg, #ffffff 0%, #f5edff 100%);
+      --menu-hover: linear-gradient(180deg, #ffffff 0%, #efe2ff 100%);
+      --menu-border: rgba(216, 180, 254, 0.95);
+      --menu-shadow: 0 5px 0 #d8b4fe, 0 8px 18px rgba(126, 34, 206, 0.1);
+      --menu-active: 0 1px 0 #d8b4fe, 0 2px 6px rgba(126, 34, 206, 0.08);
+      --menu-icon-bg: #f3e8ff;
+      --menu-icon-color: #7e22ce;
+
+      --menu-ls-bg: linear-gradient(180deg, #faf0ff 0%, #f3d9ff 100%);
+      --menu-ls-border: rgba(192, 132, 252, 0.85);
+      --menu-ls-shadow: 0 5px 0 #c084fc, 0 10px 20px rgba(168, 85, 247, 0.18);
+      --menu-ls-active: 0 1px 0 #c084fc;
+
+      --error-color: #e11d48;
+    }
+
+    html[data-theme="dark"] {
+      --bg-page: #10061f;
+      --bg-glow: rgba(192, 38, 211, 0.2);
+      --text-main: #faf5ff;
+      --text-muted: rgba(216, 180, 254, 0.8);
+      --card-bg: rgba(27, 13, 51, 0.95);
+      --card-border: rgba(168, 85, 247, 0.32);
+      --card-shadow: 0 24px 56px rgba(0, 0, 0, 0.65), 0 8px 0 #110622;
+      --input-bg: rgba(18, 8, 36, 0.95);
+      --input-border: rgba(168, 85, 247, 0.38);
+      --input-focus: #d946ef;
+      --divider: rgba(107, 33, 168, 0.5);
+      --icon-hover: rgba(107, 33, 168, 0.45);
+
+      --btn-primary-bg: linear-gradient(180deg, #c026d3 0%, #9333ea 100%);
+      --btn-primary-hover: linear-gradient(180deg, #d946ef 0%, #a855f7 100%);
+      --btn-primary-shadow: 0 5px 0 #4a044e, 0 10px 22px rgba(192, 38, 211, 0.36);
+      --btn-primary-active: 0 1px 0 #4a044e;
+
+      --menu-bg: linear-gradient(180deg, #2e1a52 0%, #22123e 100%);
+      --menu-hover: linear-gradient(180deg, #3a2166 0%, #2a174c 100%);
+      --menu-border: rgba(168, 85, 247, 0.38);
+      --menu-shadow: 0 5px 0 #110722, 0 8px 18px rgba(0, 0, 0, 0.45);
+      --menu-active: 0 1px 0 #110722;
+      --menu-icon-bg: rgba(147, 51, 234, 0.28);
+      --menu-icon-color: #f0abfc;
+
+      --menu-ls-bg: linear-gradient(180deg, #4b1d6e 0%, #361352 100%);
+      --menu-ls-border: rgba(232, 121, 249, 0.45);
+      --menu-ls-shadow: 0 5px 0 #1b072b, 0 10px 22px rgba(192, 38, 211, 0.25);
+      --menu-ls-active: 0 1px 0 #1b072b;
+
+      --error-color: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100dvh;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      overscroll-behavior-y: contain;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 5%, var(--bg-glow), transparent 60%);
+      z-index: 0;
+    }
+
+    .portal-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 22px 20px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(14px);
+      transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    @media (min-width: 480px) {
+      .portal-card {
+        padding: 26px 24px;
+      }
+    }
+
+    /* Top utility row */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .kicker {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      min-width: 44px;
+      min-height: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 150ms ease, transform 120ms ease, color 150ms ease;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--icon-hover);
+      color: var(--text-main);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* Header */
+    .portal-header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .lock-emblem {
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--menu-icon-bg);
+      color: var(--menu-icon-color);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 6px 16px rgba(126, 34, 206, 0.12);
+      font-size: 24px;
+    }
+
+    .portal-header h1 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .portal-header p {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    /* Lock Screen */
+    #lockScreen {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pin-field-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .lock-input {
+      width: 100%;
+      min-height: 58px;
+      background: var(--input-bg);
+      border: 2px solid var(--input-border);
+      border-radius: 18px;
+      padding: 12px 52px 12px 52px;
+      color: var(--text-main);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 8px;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .lock-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.45;
+      letter-spacing: 6px;
+    }
+
+    .lock-input:focus {
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.18);
+    }
+
+    .toggle-vis-btn {
+      position: absolute;
+      right: 6px;
+      min-width: 44px;
+      min-height: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .unlock-btn {
+      width: 100%;
+      min-height: 56px;
+      border: none;
+      border-radius: 18px;
+      background: var(--btn-primary-bg);
+      color: #ffffff;
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--btn-primary-shadow);
+      touch-action: manipulation;
+      transition:
+        transform 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        background 150ms ease;
+    }
+
+    .unlock-btn:hover {
+      background: var(--btn-primary-hover);
+    }
+
+    .unlock-btn:active {
+      transform: translateY(3px);
+      box-shadow: var(--btn-primary-active);
+    }
+
+    .error-msg {
+      min-height: 20px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--error-color);
+    }
+
+    /* 3D Menu Screen */
+    #menuScreen {
+      display: none;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    #menuScreen.open {
+      display: flex;
+      animation: portalReveal 260ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes portalReveal {
+      from { opacity: 0; transform: translateY(8px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes shakeError {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-7px); }
+      40% { transform: translateX(7px); }
+      60% { transform: translateX(-5px); }
+      80% { transform: translateX(5px); }
+    }
+
+    .shake {
+      animation: shakeError 340ms ease;
+    }
+
+    .menu-btn {
+      width: 100%;
+      min-height: 62px;
+      padding: 10px 16px;
+      border-radius: 18px;
+      text-decoration: none;
+      background: var(--menu-bg);
+      color: var(--text-main);
+      border: 1px solid var(--menu-border);
+      box-shadow: var(--menu-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      touch-action: manipulation;
+      transition:
+        transform 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        background 150ms ease;
+    }
+
+    .menu-btn:hover {
+      background: var(--menu-hover);
+    }
+
+    .menu-btn:active {
+      transform: translateY(3px);
+      box-shadow: var(--menu-active);
+    }
+
+    .menu-btn.menu-special {
+      background: var(--menu-ls-bg);
+      border-color: var(--menu-ls-border);
+      box-shadow: var(--menu-ls-shadow);
+    }
+
+    .menu-btn.menu-special:active {
+      transform: translateY(3px);
+      box-shadow: var(--menu-ls-active);
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background: var(--menu-icon-bg);
+      color: var(--menu-icon-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .menu-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      min-width: 0;
+    }
+
+    .menu-title {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-arrow {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Footer */
+    .portal-footer {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 8px;
+      margin: -6px -8px;
+      border-radius: 10px;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .back-link:hover {
+      background-color: var(--icon-hover);
+      color: var(--text-main);
+    }
+
+    /* Floating Lavender Hearts */
+    .hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 40;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: 18%;
+      font-size: 20px;
+      opacity: 0;
+      animation: floatUpHeart 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes floatUpHeart {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      20% { opacity: 0.95; }
+      100% { transform: translateY(-220px) scale(1.25); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu-btn, .unlock-btn, .icon-btn { transition: none; }
+      #menuScreen.open, .shake, .floating-heart { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <main class="portal-card">
+    <div class="top-bar">
+      <span class="kicker">💜 Secure 3D Portal</span>
+      <div class="top-actions">
+        <button type="button" class="icon-btn" id="lockAgainBtn" style="display:none" aria-label="Lock Portal" title="Lock">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </button>
+        <button type="button" class="icon-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Theme">
+          <svg id="moonIcon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg id="sunIcon" style="display:none" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <header class="portal-header">
+      <div class="lock-emblem" id="emblemIcon">🔐</div>
+      <h1>Lakmina Sanjana 👑️</h1>
+      <p id="portalSubtitle">පිවිසීමට ඔබගේ රහස් අංකය ඇතුළත් කරන්න</p>
+    </header>
+
+    <!-- Lock Screen -->
+    <section id="lockScreen" aria-label="PIN Lock Screen">
+      <div class="pin-field-wrap" id="pinWrap">
+        <input
+          type="password"
+          inputmode="numeric"
+          id="pinInput"
+          class="lock-input"
+          placeholder="••"
+          maxlength="4"
+          autocomplete="off"
+          aria-label="Enter secret PIN"
+        />
+        <button type="button" class="toggle-vis-btn" id="toggleVisBtn" aria-label="Show or hide PIN">
+          <svg id="eyeIcon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg id="eyeOffIcon" style="display:none" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+        </button>
+      </div>
+
+      <button type="button" class="unlock-btn" id="unlockBtn">
+        <span>🔓 ඇතුළු වන්න</span>
+      </button>
+
+      <div id="errorMsg" class="error-msg" aria-live="polite"></div>
+    </section>
+
+    <!-- 3D Portal Menu -->
+    <nav id="menuScreen" aria-label="Portal destinations">
+      <a href="Gallery.html" class="menu-btn">
+        <span class="menu-left">
+          <span class="menu-icon">📷</span>
+          <span class="menu-text">
+            <span class="menu-title">Gallery</span>
+            <span class="menu-sub">Photos &amp; Memories</span>
+          </span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </a>
+
+      <a href="V_L-S.html" class="menu-btn">
+        <span class="menu-left">
+          <span class="menu-icon">🎬</span>
+          <span class="menu-text">
+            <span class="menu-title">V_L-S</span>
+            <span class="menu-sub">Special Videos</span>
+          </span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </a>
+
+      <a href="GEME.html" class="menu-btn">
+        <span class="menu-left">
+          <span class="menu-icon">🎮</span>
+          <span class="menu-text">
+            <span class="menu-title">GEME</span>
+            <span class="menu-sub">Fun Mini Games</span>
+          </span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </a>
+
+      <a href="MASEJ.html" class="menu-btn">
+        <span class="menu-left">
+          <span class="menu-icon">💌</span>
+          <span class="menu-text">
+            <span class="menu-title">MASEJ</span>
+            <span class="menu-sub">Sweet Messages</span>
+          </span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </a>
+
+      <a href="L+S.html" class="menu-btn menu-special">
+        <span class="menu-left">
+          <span class="menu-icon">💜</span>
+          <span class="menu-text">
+            <span class="menu-title">L+S</span>
+            <span class="menu-sub">Lakmina &amp; Sanjana 🌙</span>
+          </span>
+        </span>
+        <span class="menu-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <footer class="portal-footer">
+      <a href="index.html" class="back-link">← Calculator</a>
+      <span>SANJANA 🌙</span>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const SECRET_PIN = '05';
+      const pinInput = document.getElementById('pinInput');
+      const pinWrap = document.getElementById('pinWrap');
+      const unlockBtn = document.getElementById('unlockBtn');
+      const lockScreen = document.getElementById('lockScreen');
+      const menuScreen = document.getElementById('menuScreen');
+      const errorMsg = document.getElementById('errorMsg');
+      const emblemIcon = document.getElementById('emblemIcon');
+      const portalSubtitle = document.getElementById('portalSubtitle');
+      const lockAgainBtn = document.getElementById('lockAgainBtn');
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const moonIcon = document.getElementById('moonIcon');
+      const sunIcon = document.getElementById('sunIcon');
+      const toggleVisBtn = document.getElementById('toggleVisBtn');
+      const eyeIcon = document.getElementById('eyeIcon');
+      const eyeOffIcon = document.getElementById('eyeOffIcon');
+      const heartsLayer = document.getElementById('heartsLayer');
+
+      let isDark = localStorage.getItem('ls_calc_theme_v1') === 'dark';
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', isDark ? '#10061f' : '#f5f0ff');
+        moonIcon.style.display = isDark ? 'none' : 'block';
+        sunIcon.style.display = isDark ? 'block' : 'none';
+        localStorage.setItem('ls_calc_theme_v1', isDark ? 'dark' : 'light');
+      }
+
+      function spawnLavenderHearts() {
+        const symbols = ['💜', '✨', '🌙', '🪻'];
+        for (let i = 0; i < 8; i++) {
+          const el = document.createElement('span');
+          el.className = 'floating-heart';
+          el.textContent = symbols[i % symbols.length];
+          el.style.left = (15 + Math.random() * 70) + '%';
+          el.style.animationDelay = (i * 0.08) + 's';
+          heartsLayer.appendChild(el);
+          setTimeout(function () {
+            if (el.parentNode) el.parentNode.removeChild(el);
+          }, 2100);
+        }
+      }
+
+      function vibrate(ms) {
+        if (navigator.vibrate) {
+          try { navigator.vibrate(ms); } catch (e) {}
+        }
+      }
+
+      function unlockPortal() {
+        const pin = pinInput.value.trim();
+        if (pin === SECRET_PIN) {
+          vibrate(15);
+          errorMsg.textContent = '';
+          lockScreen.style.display = 'none';
+          menuScreen.classList.add('open');
+          lockAgainBtn.style.display = 'inline-flex';
+          emblemIcon.textContent = '💜';
+          portalSubtitle.textContent = 'සාදරයෙන් පිළිගන්නවා, Sanjana 🌙';
+          spawnLavenderHearts();
+        } else {
+          vibrate(30);
+          errorMsg.textContent = '❌ වැරදි රහස් අංකයකි! නැවත උත්සාහ කරන්න 💜';
+          pinWrap.classList.remove('shake');
+          void pinWrap.offsetWidth;
+          pinWrap.classList.add('shake');
+          pinInput.value = '';
+          pinInput.focus();
+        }
+      }
+
+      function lockPortal() {
+        vibrate(10);
+        menuScreen.classList.remove('open');
+        lockScreen.style.display = 'flex';
+        lockAgainBtn.style.display = 'none';
+        emblemIcon.textContent = '🔐';
+        portalSubtitle.textContent = ' පිවිසීමට ඔබගේ රහස් අංකය ඇතුළත් කරන්න';
+        pinInput.value = '';
+        errorMsg.textContent = '';
+        pinInput.focus();
+      }
+
+      unlockBtn.addEventListener('click', unlockPortal);
+      lockAgainBtn.addEventListener('click', lockPortal);
+
+      pinInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          unlockPortal();
+        }
+      });
+
+      toggleVisBtn.addEventListener('click', function () {
+        const isPassword = pinInput.type === 'password';
+        pinInput.type = isPassword ? 'text' : 'password';
+        eyeIcon.style.display = isPassword ? 'none' : 'block';
+        eyeOffIcon.style.display = isPassword ? 'block' : 'none';
+      });
+
+      themeToggleBtn.addEventListener('click', function () {
+        isDark = !isDark;
+        applyTheme();
+      });
+
+      applyTheme();
+    })();
+  </script>
+</body>
+</html>

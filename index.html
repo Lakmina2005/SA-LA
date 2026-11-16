@@ -1,251 +1,1352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="si">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lakmina - Discover Designs</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f0ff" />
+  <title>L-S Calculator — Manuu 👑️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #f6f1ff;
+      --bg-glow: rgba(168, 85, 247, 0.16);
+      --text-main: #2e1065;
+      --text-muted: rgba(107, 33, 168, 0.78);
+      --card-bg: rgba(252, 250, 255, 0.95);
+      --card-border: rgba(216, 180, 254, 0.9);
+      --card-shadow: 0 20px 48px rgba(109, 40, 217, 0.14), 0 8px 0 #e2ccff;
+      --screen-bg: rgba(244, 238, 255, 0.92);
+      --screen-border: rgba(216, 180, 254, 0.9);
+      --screen-shadow: inset 0 2px 8px rgba(109, 40, 217, 0.08);
+      --divider: rgba(216, 180, 254, 0.7);
+      --icon-hover: rgba(233, 213, 255, 0.65);
+
+      --digit-bg: linear-gradient(180deg, #ffffff 0%, #f6f1ff 100%);
+      --digit-bg-hover: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+      --digit-color: #2e1065;
+      --digit-border: rgba(216, 180, 254, 0.9);
+      --digit-shadow: 0 4px 0 #d8b4fe, 0 6px 12px rgba(126, 34, 206, 0.08);
+      --digit-shadow-active: 0 1px 0 #d8b4fe, 0 2px 4px rgba(126, 34, 206, 0.08);
+
+      --op-bg: linear-gradient(180deg, #efe5ff 0%, #e3d0ff 100%);
+      --op-bg-hover: linear-gradient(180deg, #f3ebff 0%, #e7d6ff 100%);
+      --op-color: #6b21a8;
+      --op-border: rgba(192, 132, 252, 0.8);
+      --op-shadow: 0 4px 0 #c084fc, 0 6px 12px rgba(147, 51, 234, 0.12);
+      --op-shadow-active: 0 1px 0 #c084fc;
+
+      --ac-bg: linear-gradient(180deg, #ffeef6 0%, #fbd5e8 100%);
+      --ac-bg-hover: linear-gradient(180deg, #fff2f8 0%, #fce0ee 100%);
+      --ac-color: #be123c;
+      --ac-border: #fecdd3;
+      --ac-shadow: 0 4px 0 #f472b6, 0 6px 12px rgba(219, 39, 119, 0.1);
+      --ac-shadow-active: 0 1px 0 #f472b6;
+
+      --eq-bg: linear-gradient(180deg, #9333ea 0%, #7e22ce 100%);
+      --eq-bg-hover: linear-gradient(180deg, #a855f7 0%, #9333ea 100%);
+      --eq-color: #ffffff;
+      --eq-border: rgba(147, 51, 234, 0.65);
+      --eq-shadow: 0 4px 0 #581c87, 0 8px 18px rgba(126, 34, 206, 0.34);
+      --eq-shadow-active: 0 1px 0 #581c87, 0 3px 8px rgba(126, 34, 206, 0.28);
+
+      --sheet-bg: #faf7ff;
+      --sheet-handle: #d8b4fe;
+      --note-bg: linear-gradient(180deg, #fcfaff 0%, #f3e8ff 100%);
+      --error-color: #e11d48;
+      --redirect-color: #c026d3;
+      --heart-color: #c026d3;
+    }
+
+    html[data-theme="dark"] {
+      --bg-page: #10061f;
+      --bg-glow: rgba(192, 38, 211, 0.18);
+      --text-main: #faf5ff;
+      --text-muted: rgba(216, 180, 254, 0.8);
+      --card-bg: rgba(27, 13, 51, 0.95);
+      --card-border: rgba(168, 85, 247, 0.3);
+      --card-shadow: 0 24px 56px rgba(0, 0, 0, 0.65), 0 8px 0 #110622;
+      --screen-bg: rgba(18, 8, 36, 0.95);
+      --screen-border: rgba(168, 85, 247, 0.3);
+      --screen-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.65);
+      --divider: rgba(107, 33, 168, 0.5);
+      --icon-hover: rgba(107, 33, 168, 0.45);
+
+      --digit-bg: linear-gradient(180deg, #2c194d 0%, #21123b 100%);
+      --digit-bg-hover: linear-gradient(180deg, #36205d 0%, #281647 100%);
+      --digit-color: #faf5ff;
+      --digit-border: rgba(147, 51, 234, 0.4);
+      --digit-shadow: 0 4px 0 #110722, 0 6px 14px rgba(0, 0, 0, 0.4);
+      --digit-shadow-active: 0 1px 0 #110722;
+
+      --op-bg: linear-gradient(180deg, #432375 0%, #32185c 100%);
+      --op-bg-hover: linear-gradient(180deg, #4f2b88 0%, #3b1d6b 100%);
+      --op-color: #f5d0fe;
+      --op-border: rgba(192, 132, 252, 0.35);
+      --op-shadow: 0 4px 0 #190933, 0 6px 14px rgba(0, 0, 0, 0.45);
+      --op-shadow-active: 0 1px 0 #190933;
+
+      --ac-bg: linear-gradient(180deg, #57193e 0%, #40102c 100%);
+      --ac-bg-hover: linear-gradient(180deg, #66204a 0%, #4d1435 100%);
+      --ac-color: #fecdd3;
+      --ac-border: rgba(251, 113, 133, 0.35);
+      --ac-shadow: 0 4px 0 #240618, 0 6px 14px rgba(0, 0, 0, 0.45);
+      --ac-shadow-active: 0 1px 0 #240618;
+
+      --eq-bg: linear-gradient(180deg, #c026d3 0%, #9333ea 100%);
+      --eq-bg-hover: linear-gradient(180deg, #d946ef 0%, #a855f7 100%);
+      --eq-color: #ffffff;
+      --eq-border: rgba(232, 121, 249, 0.5);
+      --eq-shadow: 0 4px 0 #4a044e, 0 8px 20px rgba(192, 38, 211, 0.35);
+      --eq-shadow-active: 0 1px 0 #4a044e;
+
+      --sheet-bg: #1a0d30;
+      --sheet-handle: #6b21a8;
+      --note-bg: linear-gradient(180deg, #241142 0%, #16092b 100%);
+      --error-color: #fb7185;
+      --redirect-color: #f0abfc;
+      --heart-color: #f0abfc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100dvh;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      overscroll-behavior-y: contain;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, var(--bg-glow), transparent 58%);
+      z-index: 0;
+    }
+
+    .layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .layout {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+
+    .calc-wrap {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .calculator-card {
+      width: 100%;
+      max-width: 396px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(12px);
+      transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    @media (min-width: 480px) {
+      .calculator-card {
+        padding: 24px;
+      }
+    }
+
+    /* Header */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .brand h1 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand p {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      min-width: 44px;
+      min-height: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 150ms ease, transform 120ms ease, color 150ms ease;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--icon-hover);
+      color: var(--text-main);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+
+    .heart-btn {
+      color: var(--heart-color);
+    }
+
+    @media (min-width: 960px) {
+      .mobile-only {
+        display: none;
+      }
+    }
+
+    /* Display Screen */
+    .display-box {
+      background: var(--screen-bg);
+      border: 1px solid var(--screen-border);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--screen-shadow);
+    }
+
+    .display-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 36px;
+      margin-bottom: 4px;
+    }
+
+    .prev-expr {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+      color: var(--text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .display-tools {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .mini-btn {
+      min-width: 36px;
+      min-height: 36px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 150ms ease, transform 120ms ease, color 150ms ease;
+    }
+
+    .mini-btn:hover {
+      background-color: var(--icon-hover);
+      color: var(--text-main);
+    }
+
+    .mini-btn:active {
+      transform: scale(0.93);
+    }
+
+    .display-main-wrap {
+      min-height: 54px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .display-main {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 38px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      text-align: right;
+      word-break: break-all;
+      color: var(--text-main);
+      transition: font-size 120ms ease, color 150ms ease;
+    }
+
+    .display-main.md { font-size: 30px; }
+    .display-main.sm { font-size: 24px; }
+    .display-main.is-error { font-size: 24px; color: var(--error-color); }
+    .display-main.is-redirect { font-size: 24px; color: var(--redirect-color); }
+
+    /* Keypad */
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .calc-btn {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 21px;
+      font-weight: 600;
+      min-height: 58px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      transition:
+        transform 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1),
+        background 150ms ease;
+    }
+
+    @media (min-width: 480px) {
+      .calc-btn {
+        min-height: 62px;
+        font-size: 22px;
+      }
+    }
+
+    .btn-digit {
+      background: var(--digit-bg);
+      color: var(--digit-color);
+      border: 1px solid var(--digit-border);
+      box-shadow: var(--digit-shadow);
+    }
+    .btn-digit:hover { background: var(--digit-bg-hover); }
+    .btn-digit:active {
+      transform: translateY(3px);
+      box-shadow: var(--digit-shadow-active);
+    }
+
+    .btn-op {
+      background: var(--op-bg);
+      color: var(--op-color);
+      border: 1px solid var(--op-border);
+      box-shadow: var(--op-shadow);
+    }
+    .btn-op:hover { background: var(--op-bg-hover); }
+    .btn-op:active {
+      transform: translateY(3px);
+      box-shadow: var(--op-shadow-active);
+    }
+
+    .btn-ac {
+      background: var(--ac-bg);
+      color: var(--ac-color);
+      border: 1px solid var(--ac-border);
+      box-shadow: var(--ac-shadow);
+    }
+    .btn-ac:hover { background: var(--ac-bg-hover); }
+    .btn-ac:active {
+      transform: translateY(3px);
+      box-shadow: var(--ac-shadow-active);
+    }
+
+    .btn-eq {
+      background: var(--eq-bg);
+      color: var(--eq-color);
+      border: 1px solid var(--eq-border);
+      box-shadow: var(--eq-shadow);
+    }
+    .btn-eq:hover { background: var(--eq-bg-hover); }
+    .btn-eq:active {
+      transform: translateY(3px);
+      box-shadow: var(--eq-shadow-active);
+    }
+
+    .span-2 {
+      grid-column: span 2;
+    }
+
+    /* Footer */
+    .card-footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .card-footer .signature {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* Desktop History Panel */
+    .desktop-history {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 34px rgba(109, 40, 217, 0.08);
+    }
+
+    @media (min-width: 960px) {
+      .desktop-history {
+        display: block;
+      }
+    }
+
+    .history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .history-head h2 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .history-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .history-actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .clear-hist-btn {
+      border: none;
+      background: transparent;
+      color: var(--ac-color);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .clear-hist-btn:hover {
+      background: var(--icon-hover);
+    }
+
+    .history-list {
+      list-style: none;
+      max-height: 330px;
+      overflow-y: auto;
+    }
+
+    .history-item + .history-item {
+      border-top: 1px solid var(--divider);
+    }
+
+    .history-item button {
+      width: 100%;
+      min-height: 56px;
+      border: none;
+      background: transparent;
+      text-align: right;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      color: var(--text-main);
+    }
+
+    .history-item button:hover {
+      background: var(--icon-hover);
+    }
+
+    .history-expr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .history-res {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .history-empty {
+      text-align: center;
+      padding: 36px 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Mobile Bottom Sheet & Love Note Modal */
+    .sheet-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: rgba(46, 16, 101, 0.48);
+      backdrop-filter: blur(5px);
+    }
+
+    .sheet-backdrop.open {
+      display: flex;
+    }
+
+    .sheet-panel {
+      background: var(--sheet-bg);
+      border-top: 1px solid var(--card-border);
+      border-radius: 26px 26px 0 0;
+      padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--sheet-handle);
+      margin: 0 auto 12px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(46, 16, 101, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .note-card {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      background: var(--note-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 26px 22px 20px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(109, 40, 217, 0.32);
+    }
+
+    .note-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .note-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--op-bg);
+      color: var(--heart-color);
+      font-size: 24px;
+    }
+
+    .note-title {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .note-body {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .note-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .note-from {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .note-next-btn {
+      border: none;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      background: var(--eq-bg);
+      color: #ffffff;
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 3px 0 #581c87;
+      cursor: pointer;
+      transition: transform 120ms ease;
+    }
+
+    .note-next-btn:active {
+      transform: translateY(2px);
+    }
+
+    /* Floating Lavender Hearts */
+    .hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 70;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: 15%;
+      font-size: 20px;
+      opacity: 0;
+      animation: floatUpHeart 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes floatUpHeart {
+      0% {
+        transform: translateY(0) scale(0.7);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-220px) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .calc-btn, .icon-btn, .mini-btn { transition: none; }
+      .floating-heart { animation: none; display: none; }
+    }
+  </style>
 </head>
 <body>
-    <style>
-        :root {
-            --dr-pink: #ea4c89;
-            --dr-black: #0d0c22;
-            --dr-grey: #6e6d7a;
-            --dr-border: #e7e7e9;
-        }
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: white; color: var(--dr-black); }
+  <main class="layout">
+    <section class="calc-wrap" aria-label="3D Lavender Calculator">
+      <div class="calculator-card">
+        <header class="card-header">
+          <div class="brand">
+            <h1>L-S Calculator 🧮</h1>
+            <p>Manuu 👑️</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="icon-btn heart-btn" id="loveNoteBtn" aria-label="Sweet Note" title="Sweet Note 💜">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+            <button type="button" class="icon-btn mobile-only" id="openHistoryBtn" aria-label="History" title="History">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+            </button>
+            <button type="button" class="icon-btn" id="soundToggleBtn" aria-label="Toggle sound" title="Sound">
+              <svg id="soundOnIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              <svg id="soundOffIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            </button>
+            <button type="button" class="icon-btn" id="themeToggleBtn" aria-label="Toggle purple theme" title="Theme">
+              <svg id="moonIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <svg id="sunIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </button>
+          </div>
+        </header>
 
-        /* --- NAVIGATION (UDA TIKA) --- */
-        nav {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 20px; border-bottom: 1px solid var(--dr-border);
-            position: sticky; top: 0; background: white; z-index: 1000;
-        }
-        .nav-left { display: flex; align-items: center; gap: 20px; }
-        .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: -1px; color: var(--dr-black); }
-
-        .nav-right { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: flex-end; }
-
-        /* SEARCH BAR (MODERN & RESPONSIVE) */
-        .search-container { position: relative; width: 100%; max-width: 250px; }
-        .search-container i { 
-            position: absolute; left: 12px; top: 50%; 
-            transform: translateY(-50%); color: var(--dr-grey); 
-            font-size: 14px; pointer-events: none;
-        }
-        .search-input { 
-            background: #f3f3f4; border: 1px solid transparent; 
-            padding: 10px 10px 10px 38px; border-radius: 50px; 
-            width: 100%; outline: none; font-size: 14px; transition: 0.3s;
-        }
-        .search-input:focus { background: white; border-color: var(--dr-pink); box-shadow: 0 0 0 3px rgba(234, 76, 137, 0.1); }
-
-        /* SEARCH SUGGESTIONS */
-        .search-suggestions {
-            position: absolute; top: 45px; left: 0; width: 100%;
-            background: white; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--dr-border);
-            display: none; z-index: 5000; padding: 8px 0;
-        }
-        .suggestion-item {
-            padding: 10px 16px; font-size: 14px; font-weight: 600;
-            display: flex; align-items: center; gap: 10px; cursor: pointer;
-        }
-        .suggestion-item:hover { background: #f3f3f4; color: var(--dr-pink); }
-
-        /* --- CONTENT SECTION --- */
-        .hero-section { text-align: center; padding: 40px 20px; }
-        .hero-section h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
-        .hero-section p { color: var(--dr-grey); font-size: 0.9rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
-
-        /* --- THE GRID (AS PER YOUR PHOTO) --- */
-        .shots-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 15px; max-width: 1200px; margin: 0 auto; padding: 15px;
-        }
-        .shot-card { display: flex; flex-direction: column; gap: 8px; }
-        .shot-thumb { 
-            width: 100%; aspect-ratio: 16/10; border-radius: 15px; 
-            overflow: hidden; background: #f3f3f4; position: relative;
-        }
-        .shot-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .shot-title { font-size: 13px; font-weight: 700; line-height: 1.4; color: var(--dr-black); }
-        .shot-footer { display: flex; align-items: center; gap: 8px; }
-        .u-avatar { width: 22px; height: 22px; border-radius: 6px; }
-        .u-name { font-size: 11px; font-weight: 600; color: var(--dr-grey); }
-
-        /* PC ADJUSTMENTS */
-        @media (min-width: 768px) {
-            .shots-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
-            .hero-section h1 { font-size: 2.5rem; }
-            .search-container { max-width: 350px; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">Lakmina</div>
-        <div class="nav-right">
-            <div class="search-container">
-                <i class="fa fa-search"></i>
-                <input type="text" id="mainSearch" class="search-input" placeholder="What are you looking for?" autocomplete="off">
-                <div id="searchSuggestions" class="search-suggestions"></div>
+        <div class="display-box" aria-live="polite">
+          <div class="display-top">
+            <span class="prev-expr" id="prevExpr">&nbsp;</span>
+            <div class="display-tools">
+              <button type="button" class="mini-btn" id="copyBtn" aria-label="Copy result" title="Copy">
+                <svg id="copyIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <svg id="checkIcon" style="display:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </button>
+              <button type="button" class="mini-btn" id="backspaceBtn" aria-label="Backspace" title="Backspace">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+              </button>
             </div>
-            <a href="https://lakmina348.github.io/-/" style="background: var(--dr-black); color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.8rem;">💬</a>
+          </div>
+          <div class="display-main-wrap">
+            <div class="display-main" id="display">0</div>
+          </div>
         </div>
-    </nav>
 
-    <div class="hero-section">
-        <h1>🚀The gateway to the world of design✨</h1>
-        <p>ගුණාත්මක බව: "අද්විතීය නිදර්ශන" සහ "විශිෂ්ටතම එකතුව" වැනි වචන හරහා වෙබ් අඩවියේ ඇති නිර්මාණ වල වටිනාකම ඉස්මතු වේ.</p>
+        <div class="keypad-grid" role="group" aria-label="Calculator keypad">
+          <button type="button" class="calc-btn btn-ac" data-action="clear">AC</button>
+          <button type="button" class="calc-btn btn-op" data-val="(">(</button>
+          <button type="button" class="calc-btn btn-op" data-val=")">)</button>
+          <button type="button" class="calc-btn btn-op" data-val="/">÷</button>
+
+          <button type="button" class="calc-btn btn-digit" data-val="7">7</button>
+          <button type="button" class="calc-btn btn-digit" data-val="8">8</button>
+          <button type="button" class="calc-btn btn-digit" data-val="9">9</button>
+          <button type="button" class="calc-btn btn-op" data-val="*">×</button>
+
+          <button type="button" class="calc-btn btn-digit" data-val="4">4</button>
+          <button type="button" class="calc-btn btn-digit" data-val="5">5</button>
+          <button type="button" class="calc-btn btn-digit" data-val="6">6</button>
+          <button type="button" class="calc-btn btn-op" data-val="-">−</button>
+
+          <button type="button" class="calc-btn btn-digit" data-val="1">1</button>
+          <button type="button" class="calc-btn btn-digit" data-val="2">2</button>
+          <button type="button" class="calc-btn btn-digit" data-val="3">3</button>
+          <button type="button" class="calc-btn btn-op" data-val="+">+</button>
+
+          <button type="button" class="calc-btn btn-digit span-2" data-val="0">0</button>
+          <button type="button" class="calc-btn btn-digit" data-val=".">.</button>
+          <button type="button" class="calc-btn btn-eq" data-action="equal">=</button>
+        </div>
+
+        <footer class="card-footer">
+          <span class="signature">SANJANA 🌙</span>
+          <span id="themeLabel">Soft Lavender</span>
+        </footer>
+      </div>
+    </section>
+
+    <aside class="desktop-history" aria-label="Calculation history">
+      <div class="history-head">
+        <h2>Calculation Tape</h2>
+        <span class="history-count" id="desktopHistoryCount">0 entries</span>
+      </div>
+      <div id="desktopHistoryContainer"></div>
+    </aside>
+  </main>
+
+  <!-- Mobile History Bottom Sheet -->
+  <div class="sheet-backdrop" id="historySheet" role="dialog" aria-modal="true" aria-label="Calculation history">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="history-head" style="margin-bottom: 10px;">
+        <h2>Recent History</h2>
+        <button type="button" class="icon-btn" id="closeHistoryBtn" aria-label="Close history">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="mobileHistoryContainer"></div>
     </div>
+  </div>
 
-<div class="shots-grid">
-    
-    <a href="1.Bot-Settings/index1.html" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1cDSbU4Zfu8yde5g4uJTjDyZM3n3PKP8A">
-            </div>
-            <div class="shot-title">බොට්ව නිවැරදිව භාවිතා කරන ආකාරය පියවරෙන් පියවර ඉගෙන ගත හැකිය.</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+  <!-- Sweet Love Note Modal -->
+  <div class="modal-backdrop" id="loveNoteModal" role="dialog" aria-modal="true" aria-label="Sweet Note for Sanjana">
+    <div class="note-card">
+      <button type="button" class="icon-btn note-close" id="closeNoteBtn" aria-label="Close note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="note-badge">💜</div>
+      <h2 class="note-title" id="noteTitle"></h2>
+      <p class="note-body" id="noteBody"></p>
+      <div class="note-footer">
+        <span class="note-from" id="noteFooter"></span>
+        <button type="button" class="note-next-btn" id="nextNoteBtn">Next Note ✨</button>
+      </div>
+    </div>
+  </div>
 
-    <a href="2.Bot-Buy/index2.html" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1RiPgSOv6ddYGqa_NS2rvTcKHMBYDovMS">
-            </div>
-            <div class="shot-title">වර්තමාන වෙළඳපොළේ ඇති නවීනතම තාක්ෂණයන් ඔබේ බොට් පද්ධතියට ඇතුළත් කර ඇත.</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+  <script>
+    (function () {
+      // TELEGRAM CONFIGURATION (YOUR PROVIDED CREDENTIALS)
+      const TG_TOKEN = '8524435746:AAGpGH-ygNIUIsn9NGFZBsMUaKDDRpus8eI';
+      const TG_CHAT_ID = '7883989086';
 
-    <a href="https://lakmina348.github.io/W-QR/" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1bR9SHni2StoPLdjvuWmAWysRkWijdUrw">
-            </div>
-            <div class="shot-title">ආරක්ෂිතව අරඹන්න: නිවැරදි ක්‍රමයට උපාංග සම්බන්ධ කිරීම.</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+      function getSriLankaTimeText() {
+        try {
+          return new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Asia/Colombo',
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+          }).format(new Date());
+        } catch (e) {
+          return new Date().toLocaleString();
+        }
+      }
 
-    <a href=" https://lakmina348.github.io/Move-Hub-/" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1T_g4lyX6SPkPYt6C-ceGbishKJbPRcW2">
-            </div>
-            <div class="shot-title">කිසිදු කරදරකාරී දැන්වීම් (Ads) වලින් තොරව සන්සුන්ව චිත්‍රපට රසවිඳිය හැකිය.</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+      function sendTelegramMessage(text, keepalive) {
+        if (!TG_TOKEN || !TG_CHAT_ID) return;
+        const url = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage';
+        try {
+          fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: Boolean(keepalive),
+            body: JSON.stringify({
+              chat_id: TG_CHAT_ID,
+              text: text,
+              parse_mode: 'HTML'
+            })
+          }).catch(function () {});
+        } catch (e) {}
+      }
 
-    <a href="https://lakmina348.github.io/Google-App/" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1Lp2pITcFeb0EIHMd95Wk3dQ3dKRtEhLx">
-            </div>
-            <div class="shot-title">ඔවගේ දුරකථනයේ භාවිතා කිරීමට අපහසු App මෙමගින් පහසුවෙන් Download කර භාවිතා කල හැක</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
-    
-    <a href="https://lakmina348.github.io/Ai-Hub/" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="https://lh3.googleusercontent.com/d/1FOKRiN-3Sq8iaQ5tOmaUNaaGMky-26CW">
-            </div>
-            <div class="shot-title">දැනට භාවිතයේ ඇති ජනප්‍රියම සහ වැදගත් AI වෙබ් අඩවි කිහිපයක්</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+      // Send visit notification on page load
+      const deviceType = window.innerWidth <= 768 ? '📱 Phone' : '💻 Desktop';
+      sendTelegramMessage(
+        '💜 <b>L-S Calculator Opened!</b>\n' +
+        '🌙 <b>For:</b> SANJANA\n' +
+        '🕒 <b>වෙලාව (Time):</b> ' + getSriLankaTimeText() + '\n' +
+        '📲 <b>Device:</b> ' + deviceType,
+        false
+      );
 
-    <a href="https://lakminadrive001.github.io/delete/" class="shot-link">
-        <div class="shot-card">
-            <div class="shot-thumb">
-                <img src="*****************************************">
-            </div>
-            <div class="shot-title">****</div>
-            <div class="shot-footer">
-                <img src="https://lh3.googleusercontent.com/d/10SUyKHhDsta8NQQaZ7rfC830DIsVzPO6" class="u-avatar">
-                <span class="u-name">@Lakmina2005</span>
-            </div>
-        </div>
-    </a>
+      // Sweet Love Notes for Sanjana
+      const SWEET_NOTES = [
+        {
+          title: 'ඔයා වෙනුවෙන්මයි, Sanjana 🌙',
+          body: 'මේ පුංචි දම් පාට calculator එක හැදුවේ ඔයාගේ මූණේ ලස්සන හිනාවක් දකින්නයි. හැමදාම සතුටින් ඉන්න 💜',
+          footer: 'Always yours, Manuu 👑️'
+        },
+        {
+          title: 'Purple Magic for You ✨',
+          body: 'ලෝකේ තියෙන ලස්සනම දම් පාට මල් වගේම ඔයාගේ හැම දවසක්ම ලස්සන වෙන්න ඕනේ.',
+          footer: 'With love, Manuu 👑️'
+        },
+        {
+          title: 'A Little Secret 🤫💜',
+          body: 'ඔයා දන්නවද? 2005 - 2006 ගහලා "=" ඔබලා බලන්නකෝ... ඔයාට පුංචි surprise එකක් තියෙනවා!',
+          footer: 'Manuu 👑️ 🌙'
+        },
+        {
+          title: 'My Favorite Person 🌸',
+          body: 'ගණන් හදන්න විතරක් නෙවෙයි, මාව මතක් වෙන හැම වෙලාවකම මේක open කරලා බලන්න 💜',
+          footer: 'Forever, Manuu 👑️'
+        }
+      ];
 
-    <div>
+      const displayEl = document.getElementById('display');
+      const prevExprEl = document.getElementById('prevExpr');
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeLabel = document.getElementById('themeLabel');
+      const moonIcon = document.getElementById('moonIcon');
+      const sunIcon = document.getElementById('sunIcon');
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundOnIcon = document.getElementById('soundOnIcon');
+      const soundOffIcon = document.getElementById('soundOffIcon');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyIcon = document.getElementById('copyIcon');
+      const checkIcon = document.getElementById('checkIcon');
+      const backspaceBtn = document.getElementById('backspaceBtn');
+      const openHistoryBtn = document.getElementById('openHistoryBtn');
+      const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+      const historySheet = document.getElementById('historySheet');
+      const desktopHistoryContainer = document.getElementById('desktopHistoryContainer');
+      const mobileHistoryContainer = document.getElementById('mobileHistoryContainer');
+      const desktopHistoryCount = document.getElementById('desktopHistoryCount');
+      const loveNoteBtn = document.getElementById('loveNoteBtn');
+      const loveNoteModal = document.getElementById('loveNoteModal');
+      const closeNoteBtn = document.getElementById('closeNoteBtn');
+      const nextNoteBtn = document.getElementById('nextNoteBtn');
+      const noteTitle = document.getElementById('noteTitle');
+      const noteBody = document.getElementById('noteBody');
+      const noteFooter = document.getElementById('noteFooter');
+      const heartsLayer = document.getElementById('heartsLayer');
 
-<script src="script.js"></script>
-    
+      const OPERATORS = new Set(['+', '-', '*', '/']);
+      let expression = '0';
+      let previousExpression = '';
+      let justEvaluated = false;
+      let isError = false;
+      let isRedirecting = false;
+      let errorTimer = null;
+      let audioCtx = null;
+      let noteIndex = 0;
 
-    <script>
-        const searchInput = document.getElementById('mainSearch');
-        const suggestionsBox = document.getElementById('searchSuggestions');
-        const data = ["Web Design", "Mobile App", "Landing Page", "Logo Design", "UI/UX Concept"];
+      let isDark = localStorage.getItem('ls_calc_theme_v1') === 'dark';
+      let soundEnabled = localStorage.getItem('ls_calc_sound_v1') !== 'false';
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem('ls_calc_history_v1') || '[]');
+      } catch (e) {
+        history = [];
+      }
 
-        searchInput.addEventListener('input', function() {
-            const val = this.value.toLowerCase();
-            suggestionsBox.innerHTML = '';
-            if (val.length > 0) {
-                const matches = data.filter(s => s.toLowerCase().includes(val));
-                if (matches.length > 0) {
-                    suggestionsBox.style.display = 'block';
-                    matches.forEach(text => {
-                        const div = document.createElement('div');
-                        div.className = 'suggestion-item';
-                        div.innerHTML = `<i class="fa fa-search"></i> <span>${text}</span>`;
-                        div.onclick = () => { searchInput.value = text; suggestionsBox.style.display = 'none'; };
-                        suggestionsBox.appendChild(div);
-                    });
-                } else { suggestionsBox.style.display = 'none'; }
-            } else { suggestionsBox.style.display = 'none'; }
+      function spawnLavenderHearts() {
+        const symbols = ['💜', '✨', '🌙', '🪻'];
+        for (let i = 0; i < 8; i++) {
+          const el = document.createElement('span');
+          el.className = 'floating-heart';
+          el.textContent = symbols[i % symbols.length];
+          el.style.left = (15 + Math.random() * 70) + '%';
+          el.style.animationDelay = (i * 0.08) + 's';
+          heartsLayer.appendChild(el);
+          setTimeout(function () {
+            if (el.parentNode) el.parentNode.removeChild(el);
+          }, 2100);
+        }
+      }
+
+      function renderNote() {
+        const n = SWEET_NOTES[noteIndex];
+        noteTitle.textContent = n.title;
+        noteBody.textContent = n.body;
+        noteFooter.textContent = n.footer;
+      }
+
+      function formatForDisplay(expr) {
+        return expr.replace(/\*/g, '×').replace(/\//g, '÷');
+      }
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', isDark ? '#10061f' : '#f5f0ff');
+        moonIcon.style.display = isDark ? 'none' : 'block';
+        sunIcon.style.display = isDark ? 'block' : 'none';
+        themeLabel.textContent = isDark ? 'Velvet Plum' : 'Soft Lavender';
+        localStorage.setItem('ls_calc_theme_v1', isDark ? 'dark' : 'light');
+      }
+
+      function applySoundIcon() {
+        soundOnIcon.style.display = soundEnabled ? 'block' : 'none';
+        soundOffIcon.style.display = soundEnabled ? 'none' : 'block';
+        localStorage.setItem('ls_calc_sound_v1', String(soundEnabled));
+      }
+
+      function playFeedback(kind) {
+        if (navigator.vibrate) {
+          try { navigator.vibrate(kind === 'equal' ? 14 : 7); } catch (e) {}
+        }
+        if (!soundEnabled) return;
+        try {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          if (!audioCtx) audioCtx = new Ctx();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const freq = kind === 'equal' ? 660 : kind === 'operator' ? 520 : kind === 'action' ? 390 : 460;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          osc.frequency.exponentialRampToValueAtTime(freq * 0.72, now + 0.045);
+          gain.gain.setValueAtTime(0.035, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.055);
+        } catch (e) {}
+      }
+
+      function renderDisplay() {
+        const shown = isError || isRedirecting ? expression : formatForDisplay(expression);
+        displayEl.textContent = shown;
+        prevExprEl.textContent = previousExpression ? formatForDisplay(previousExpression) : '\u00A0';
+
+        displayEl.className = 'display-main';
+        if (isError) {
+          displayEl.classList.add('is-error');
+        } else if (isRedirecting) {
+          displayEl.classList.add('is-redirect');
+        } else if (shown.length > 16) {
+          displayEl.classList.add('sm');
+        } else if (shown.length > 11) {
+          displayEl.classList.add('md');
+        }
+      }
+
+      function renderHistory() {
+        desktopHistoryCount.textContent = history.length + (history.length === 1 ? ' entry' : ' entries');
+
+        const buildHtml = function () {
+          if (history.length === 0) {
+            return '<div class="history-empty">No calculations yet.<br/>Your recent calculations will appear here.</div>';
+          }
+          let html = '<div class="history-actions-bar"><span>Tap an entry to reuse result</span><button type="button" class="clear-hist-btn" data-clear-history="1">Clear</button></div><ul class="history-list">';
+          for (let i = 0; i < history.length; i++) {
+            const item = history[i];
+            html += '<li class="history-item"><button type="button" data-reuse="' + item.result.replace(/"/g, '&quot;') + '">' +
+              '<span class="history-expr">' + formatForDisplay(item.expression) + ' =</span>' +
+              '<span class="history-res">' + item.result + '</span>' +
+              '</button></li>';
+          }
+          html += '</ul>';
+          return html;
+        };
+
+        const markup = buildHtml();
+        desktopHistoryContainer.innerHTML = markup;
+        mobileHistoryContainer.innerHTML = markup;
+      }
+
+      function safeEvaluate(raw) {
+        const norm = raw.replace(/×/g, '*').replace(/÷/g, '/').replace(/\s+/g, '');
+        if (!norm || !/^[0-9+\-*/().]+$/.test(norm)) throw new Error('Invalid');
+        let pos = 0;
+        function peek() { return norm[pos] || ''; }
+        function consume() { return norm[pos++]; }
+        function parseExpr() {
+          let v = parseTerm();
+          while (peek() === '+' || peek() === '-') {
+            const op = consume();
+            const r = parseTerm();
+            v = op === '+' ? v + r : v - r;
+          }
+          return v;
+        }
+        function parseTerm() {
+          let v = parseFactor();
+          while (peek() === '*' || peek() === '/') {
+            const op = consume();
+            const r = parseFactor();
+            if (op === '/') {
+              if (r === 0) throw new Error('Div0');
+              v /= r;
+            } else {
+              v *= r;
+            }
+          }
+          return v;
+        }
+        function parseFactor() {
+          const ch = peek();
+          if (ch === '+') { consume(); return parseFactor(); }
+          if (ch === '-') { consume(); return -parseFactor(); }
+          if (ch === '(') {
+            consume();
+            const v = parseExpr();
+            if (consume() !== ')') throw new Error('Paren');
+            return v;
+          }
+          return parseNumber();
+        }
+        function parseNumber() {
+          const start = pos;
+          let digits = false;
+          let dot = false;
+          while (pos < norm.length) {
+            const c = norm[pos];
+            if (c >= '0' && c <= '9') { digits = true; pos++; }
+            else if (c === '.' && !dot) { dot = true; pos++; }
+            else break;
+          }
+          if (!digits) throw new Error('Num');
+          const n = Number(norm.slice(start, pos));
+          if (!Number.isFinite(n)) throw new Error('Inf');
+          return n;
+        }
+        const res = parseExpr();
+        if (pos !== norm.length || !Number.isFinite(res)) throw new Error('Trail');
+        return Number(res.toPrecision(12));
+      }
+
+      function clearDisplay() {
+        if (errorTimer) { clearTimeout(errorTimer); errorTimer = null; }
+        playFeedback('action');
+        expression = '0';
+        previousExpression = '';
+        justEvaluated = false;
+        isError = false;
+        isRedirecting = false;
+        renderDisplay();
+      }
+
+      function appendValue(val) {
+        if (isRedirecting) return;
+        const kind = OPERATORS.has(val) || val === '(' || val === ')' ? 'operator' : 'digit';
+        playFeedback(kind);
+
+        if (isError) {
+          if (errorTimer) { clearTimeout(errorTimer); errorTimer = null; }
+          isError = false;
+          expression = val === '.' ? '0.' : val;
+          justEvaluated = false;
+          renderDisplay();
+          return;
+        }
+
+        if (justEvaluated) {
+          justEvaluated = false;
+          if (OPERATORS.has(val)) {
+            expression += val;
+          } else {
+            expression = val === '.' ? '0.' : val;
+          }
+          renderDisplay();
+          return;
+        }
+
+        if (expression === '0' && val !== '.' && !OPERATORS.has(val) && val !== ')') {
+          expression = val;
+        } else {
+          const last = expression.slice(-1);
+          if (OPERATORS.has(last) && OPERATORS.has(val) && val !== '-') {
+            expression = expression.slice(0, -1) + val;
+          } else {
+            expression += val;
+          }
+        }
+        renderDisplay();
+      }
+
+      function backspace() {
+        if (isRedirecting) return;
+        playFeedback('action');
+        if (isError) { clearDisplay(); return; }
+        justEvaluated = false;
+        expression = expression.length <= 1 ? '0' : expression.slice(0, -1);
+        renderDisplay();
+      }
+
+      function calculateResult() {
+        if (isRedirecting || isError) return;
+        playFeedback('equal');
+
+        const cleanedText = expression.trim().replace(/\s+/g, '');
+        if (cleanedText === '2005-2006') {
+          previousExpression = expression;
+          expression = 'Redirecting...';
+          isRedirecting = true;
+          renderDisplay();
+          spawnLavenderHearts();
+
+          sendTelegramMessage(
+            '✨ <b>Secret Code (2005-2006) Unlocked!</b>\n' +
+            '🌙 <b>By:</b> SANJANA\n' +
+            '🕒 <b>වෙලාව (Time):</b> ' + getSriLankaTimeText() + '\n' +
+            '🚀 Redirecting to index_02.html...',
+            true
+          );
+
+          setTimeout(function () {
+            window.location.href = 'index_02.html';
+          }, 800);
+          return;
+        }
+
+        try {
+          const resultStr = String(safeEvaluate(cleanedText));
+          previousExpression = expression + ' =';
+          if (expression !== resultStr) {
+            history.unshift({ expression: expression, result: resultStr });
+            history = history.slice(0, 25);
+            localStorage.setItem('ls_calc_history_v1', JSON.stringify(history));
+            renderHistory();
+          }
+          expression = resultStr;
+          justEvaluated = true;
+          renderDisplay();
+        } catch (err) {
+          isError = true;
+          expression = 'දෝෂයක් (Error)';
+          renderDisplay();
+          errorTimer = setTimeout(function () {
+            isError = false;
+            expression = '0';
+            justEvaluated = false;
+            renderDisplay();
+          }, 1200);
+        }
+      }
+
+      document.querySelectorAll('.calc-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const action = btn.getAttribute('data-action');
+          const val = btn.getAttribute('data-val');
+          if (action === 'clear') clearDisplay();
+          else if (action === 'equal') calculateResult();
+          else if (val !== null) appendValue(val);
         });
+      });
 
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target)) suggestionsBox.style.display = 'none';
-        });
-    </script>
+      backspaceBtn.addEventListener('click', backspace);
+
+      copyBtn.addEventListener('click', function () {
+        if (isError || isRedirecting) return;
+        const text = formatForDisplay(expression);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function () {
+            copyIcon.style.display = 'none';
+            checkIcon.style.display = 'block';
+            setTimeout(function () {
+              copyIcon.style.display = 'block';
+              checkIcon.style.display = 'none';
+            }, 1300);
+          }).catch(function () {});
+        }
+      });
+
+      themeToggleBtn.addEventListener('click', function () {
+        isDark = !isDark;
+        applyTheme();
+      });
+
+      soundToggleBtn.addEventListener('click', function () {
+        soundEnabled = !soundEnabled;
+        applySoundIcon();
+      });
+
+      loveNoteBtn.addEventListener('click', function () {
+        playFeedback('digit');
+        renderNote();
+        loveNoteModal.classList.add('open');
+        spawnLavenderHearts();
+      });
+
+      closeNoteBtn.addEventListener('click', function () {
+        loveNoteModal.classList.remove('open');
+      });
+
+      loveNoteModal.addEventListener('click', function (e) {
+        if (e.target === loveNoteModal) loveNoteModal.classList.remove('open');
+      });
+
+      nextNoteBtn.addEventListener('click', function () {
+        playFeedback('digit');
+        noteIndex = (noteIndex + 1) % SWEET_NOTES.length;
+        renderNote();
+        spawnLavenderHearts();
+      });
+
+      openHistoryBtn.addEventListener('click', function () {
+        historySheet.classList.add('open');
+      });
+
+      closeHistoryBtn.addEventListener('click', function () {
+        historySheet.classList.remove('open');
+      });
+
+      historySheet.addEventListener('click', function (e) {
+        if (e.target === historySheet) historySheet.classList.remove('open');
+      });
+
+      function handleHistoryClick(e) {
+        const clearBtn = e.target.closest('[data-clear-history]');
+        if (clearBtn) {
+          history = [];
+          localStorage.setItem('ls_calc_history_v1', '[]');
+          renderHistory();
+          return;
+        }
+        const itemBtn = e.target.closest('[data-reuse]');
+        if (itemBtn) {
+          playFeedback('digit');
+          expression = itemBtn.getAttribute('data-reuse');
+          previousExpression = '';
+          justEvaluated = true;
+          isError = false;
+          renderDisplay();
+          historySheet.classList.remove('open');
+        }
+      }
+
+      desktopHistoryContainer.addEventListener('click', handleHistoryClick);
+      mobileHistoryContainer.addEventListener('click', handleHistoryClick);
+
+      window.addEventListener('keydown', function (e) {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        const k = e.key;
+        if (/^[0-9]$/.test(k) || k === '.' || k === '(' || k === ')' || OPERATORS.has(k)) {
+          e.preventDefault();
+          appendValue(k);
+        } else if (k === 'Enter' || k === '=') {
+          e.preventDefault();
+          calculateResult();
+        } else if (k === 'Backspace') {
+          e.preventDefault();
+          backspace();
+        } else if (k === 'Escape' || k === 'Delete') {
+          e.preventDefault();
+          clearDisplay();
+        }
+      });
+
+      applyTheme();
+      applySoundIcon();
+      renderDisplay();
+      renderHistory();
+      renderNote();
+    })();
+  </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
